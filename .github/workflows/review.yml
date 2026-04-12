@@ -130,11 +130,6 @@ jobs:
       || (matrix.system == 'aarch64-darwin' && 'macos-latest') }}
 
     steps:
-      - uses: cachix/cachix-action@v12
-        with:
-          name: vars.CACHIX_CACHE
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          pushFilter: ".*"
       - uses: actions/checkout@v6
         with:
           sparse-checkout: |
@@ -156,6 +151,12 @@ jobs:
           builders: ${{ (vars.USE_BUILDERS == 'yes' || vars.USE_BUILDERS == 'always') && vars.BUILDERS || '' }}
           ssh-key: ${{ (vars.USE_BUILDERS == 'yes' || vars.USE_BUILDERS == 'always') && secrets.SSH_KEY || '' }}
           ssh-cert: ${{ (vars.USE_BUILDERS == 'yes' || vars.USE_BUILDERS == 'always') && secrets.SSH_CERT || '' }}
+
+      - uses: cachix/cachix-action@v12
+        with:
+          name: vars.CACHIX_CACHE
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          pushFilter: ".*"
 
       - name: install packages
         run: |
