@@ -157,6 +157,9 @@ jobs:
           name: '${{ vars.CACHIX_CACHE }}'
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           pushFilter: ".*"
+          installCommand: |
+            nix-env -iA cachix -f https://cachix.org/api/v1/install
+            cachix use ${{ vars.CACHIX_CACHE }}
 
       - name: install packages
         run: |
