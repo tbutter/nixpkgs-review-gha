@@ -163,8 +163,6 @@ jobs:
           pkgs=(coreutils nixpkgs-review jq gnused)
           if [[ ${{ inputs.push-to-cache && vars.ATTIC_SERVER != '' && vars.ATTIC_CACHE != '' }} = true ]]; then
             pkgs+=(attic-client)
-          elif [[ ${{ inputs.push-to-cache && vars.CACHIX_CACHE != '' }} = true ]]; then
-            pkgs+=(cachix)
           fi
           nix profile add "${pkgs[@]/#/.#}" --builders ''
 
