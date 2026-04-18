@@ -128,6 +128,7 @@ jobs:
       || (matrix.system == 'aarch64-linux' && 'ubuntu-24.04-arm')
       || (matrix.system == 'x86_64-darwin' && 'macos-latest')
       || (matrix.system == 'aarch64-darwin' && 'macos-latest') }}
+          - self-hosted
 
     steps:
       - uses: actions/checkout@v6
